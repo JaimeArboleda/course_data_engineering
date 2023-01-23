@@ -1,4 +1,4 @@
-# Commands and SQL queries for completing the assignments
+# Commands and SQL queries for completing the first part of assignment
 
 ```bash
 docker build --help | grep Write
@@ -57,3 +57,18 @@ tip_amount
 DESC
 LIMIT 1
 ```
+
+# Commands and considerations for completing the second part 
+
+* Configure a VM in GCP
+* Configure a ssh connection to the VM in GCP (creating a .ssh folder in the home directory, and using the IP address of the machine)
+* Install all needed software including terraform
+* Clone the git project
+* Copy a GCP service account (json file) to authenticate to google cloud from the VM
+* Follow the instructions for connecting to GCP from the command line.
+* Apply all terraform commands.
+
+The videos for those tasks are: 
+* https://www.youtube.com/watch?v=Hajwnmj0xfQ&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=12&ab_channel=DataTalksClub%E2%AC%9B
+* https://www.youtube.com/watch?v=dNkEgO-CExg&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=13&ab_channel=DataTalksClub%E2%AC%9B
+* https://www.youtube.com/watch?v=ae-CV2KfoN0&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&index=14&ab_channel=DataTalksClub%E2%AC%9B
