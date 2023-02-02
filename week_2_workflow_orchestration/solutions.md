@@ -31,3 +31,7 @@ Lastly, we run a local agent with `prefect agent start  --work-queue "default"`
 88605 rows were processed. 
 
 I had some problems with the relative paths in directories, so I used absolute paths.
+
+5. I decided to use email notifications with Prefect Cloud. I created the account, , the automation, login in prefect cloud from the CLI and then I run the python script again.
+
+To make it work, I needed to add the blocks I had locally in Orion to the Prefect Cloud. And the GPC block was created from code, [here](flows/03_deployments/blocks_cloud.py)
