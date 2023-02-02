@@ -17,3 +17,17 @@ The solution, looking at the logs in Prefect, is 447770 rows.
     etl_parent_flow(months, year, color)
 ```
 Second, we adapt the etl_gcs_to_bq to make it parametrized and to remove the 't' part.
+ 
+Third, we add log_prints to log the number of rows, which is 14851920 rows
+
+The updated python script is [here](flows/02_gcp/etl_gcs_to_bq_homework.py)
+
+4. I created the deployment with a Python script located [here](flows/03_deployments/parameterized_flow_homework_github.py). The deployment points to the parametrized flow version used in the first exercise. 
+
+To run it, we used the UI with custom params.
+
+Lastly, we run a local agent with `prefect agent start  --work-queue "default"`
+ 
+88605 rows were processed. 
+
+I had some problems with the relative paths in directories, so I used absolute paths.

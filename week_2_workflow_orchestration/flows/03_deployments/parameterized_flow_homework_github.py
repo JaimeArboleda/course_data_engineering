@@ -1,5 +1,5 @@
 from prefect.deployments import Deployment
-from .parameterized_flow_homework import etl_parent_flow
+from parameterized_flow_homework import etl_parent_flow
 from prefect.filesystems import GitHub 
 
 storage = GitHub.load("github-de-zoomcamp")
