@@ -1,101 +1,80 @@
-## Week 2: Workflow Orchestration
+# Data Engineering Zoomcamp 2023 Week 2 
+## Prefect
 
-> If you're looking for Airflow videos from the 2022 edition,
-> check the [2022 cohort folder](../cohorts/2022/week_2_data_ingestion/).
+This repo contains Python code to accompany the videos that show how to use Prefect for Data Engineering. We will create ETL workflows to extract, transform, and load your data.
 
+We will use Postgres and GCP's Google Cloud Storage and BigQuery. 
 
-### Data Lake (GCS)
+Prefect helps you observe and orchestrate your dataflows.
 
-* What is a Data Lake
-* ELT vs. ETL
-* Alternatives to components (S3/HDFS, Redshift, Snowflake etc.)
-* [Video](https://www.youtube.com/watch?v=W3Zm6rjOq70&list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb)
-* [Slides](https://docs.google.com/presentation/d/1RkH-YhBz2apIjYZAxUz2Uks4Pt51-fVWVN9CcH9ckyY/edit?usp=sharing)
+# Setup
 
+## Clone the repo
 
-### 1. Introduction to Workflow orchestration
+Clone the repo locally.
 
-* What is orchestration?
-* Workflow orchestrators vs. other types of orchestrators
-* Core features of a workflow orchestration tool
-* Different types of workflow orchestration tools that currently exist 
+## Install packages
 
-:movie_camera: [Video - TBA](TODO)
+In a conda environment, install all package dependencies with 
 
+```bash
+pip install -r requirements.txt
+```
+## Start the Prefect Orion server locally
 
-### 2. Introduction to Prefect concepts
+Create another window and activate your conda environment. Start the Orion API server locally with 
 
-* What is Prefect?
-* Installing Prefect
-* Prefect flow
-* Creating an ETL
-* Prefect task
-* Blocks and collections
-* Orion UI 
+```bash
+prefect orion start
+```
 
-:movie_camera: [Video - TBA](TODO)
+## Set up GCP 
 
-### 3. ETL with GCP & Prefect
+- Log in to [GCP](https://cloud.google.com/)
+- Create a Project
+- Set up Cloud Storage
+- Set up BigQuery
+- Create a service account with the required policies to interact with both services
 
-* Flow 1: Putting data to Google Cloud Storage 
+## Register the block types that come with prefect-gcp
 
-:movie_camera: [Video - TBA](TODO)
+`prefect block register -m prefect_gcp`
 
+## Create Prefect GCP blocks
 
-### 4. From Google Cloud Storage to Big Query
+Create a *GCP Credentials* block in the UI.
 
-* Flow 2: From GCS to BigQuery
+Paste your service account information from your JSON file into the *Service Account Info* block's field.
 
-:movie_camera: [Video - TBA](TODO)
+![img.png](images/img.png)
 
-### 5. Parametrizing Flow & Deployments 
+Create a GCS Bucket block in UI 
 
-* Parametrizing the script from your flow
-* Parameter validation with Pydantic
-* Creating a deployment locally
-* Setting up Prefect Agent
-* Running the flow
-* Notifications
+Alternatively, create these blocks using code by following the templates in the [blocks](./blocks/) folder. 
 
-:movie_camera: [Video - TBA](TODO)
+## Create flow code
 
-### 6. Schedules & Docker Storage with Infrastructure
+Write your Python functions and add `@flow` and `@task` decorators. 
 
-* Scheduling a deployment
-* Flow code storage
-* Running tasks in Docker
+Note: all code should be run from the top level of your folder to keep file paths consistent.
 
-:movie_camera: [Video - TBA](TODO)
+## Create deployments
 
-### 7. Prefect Cloud and Additional Resources 
+Create and apply your deployments.
 
+## Run a deployment or create a schedule
 
-* Using Prefect Cloud instead of local Prefect
-* Workspaces
-* Running flows on GCP
+Run a deployment ad hoc from the CLI or UI.
 
-:movie_camera: [Video - TBA](TODO)
+Or create a schedule from the UI or when you create your deployment.
 
+## Start an agent
 
-### Homework 
+Make sure your agent set up to poll the work queue you created when you made your deployment (*default* if you didn't specify a work queue).
 
-TBA
+## Later: create a Docker Image and use a DockerContainer infrastructure block
 
-## Community notes
+Bake your flow code into a Docker image, create a DockerContainer, and your flow code in a Docker container.
 
-Did you take notes? You can share them here.
-
-* Add your notes here (above this line)
-
-
-### 2022 notes 
-
-Most of these notes are about Airflow, but you will most likely
-find them useful too.
-
-* [Notes from Alvaro Navas](https://github.com/ziritrion/dataeng-zoomcamp/blob/main/notes/2_data_ingestion.md)
-* [Notes from Aaron Wright](https://github.com/ABZ-Aaron/DataEngineerZoomCamp/blob/master/week_2_data_ingestion/README.md)
-* [Notes from Abd](https://itnadigital.notion.site/Week-2-Data-Ingestion-ec2d0d36c0664bc4b8be6a554b2765fd)
-* [Blog post by Isaac Kargar](https://kargarisaac.github.io/blog/data%20engineering/jupyter/2022/01/25/data-engineering-w2.html)
-* [Blog, notes, walkthroughs by Sandy Behrens](https://learningdataengineering540969211.wordpress.com/2022/01/30/week-2-de-zoomcamp-2-3-2-ingesting-data-to-gcp-with-airflow/)
-* Add your notes here (above this line)
+## Optional: use Prefect Cloud for added capabilties
+Signup and use for free at https://app.prefect.cloud
